@@ -141,29 +141,29 @@ void DisplayHex(int value)
    if(value < 10)
    {
    //*(HEX_ptr) = value;
-	   *(HEX_ptr) = 0x63f;
+	   *(HEX_ptr) = (lookUpTable[value]);
    }
 	else{
 	unsigned int dig=count(value);
-		unsigned int temp;
+		unsigned int temp = value;
 	char arr[dig];
 	while (dig--) {
-		//printf("%d",value%10);
+		printf("%d",value%10);
  arr[dig]=value%10;
 		//printf("%d",dig);
  value/=10;
-		if(temp){
-		temp = (lookUpTable[arr[dig]] <<(8*dig)) |temp;	
-		}else{
-			temp = (lookUpTable[arr[dig]]);
-		}
+		
 			
 		//printf("%d",*(HEX_ptr));
 
 }
 				
-
-	*(HEX_ptr) = temp;	 
+if (temp<100){
+	*(HEX_ptr) = (lookUpTable[arr[0]]<<8)|(lookUpTable[arr[1]]);
+}
+if (temp >=100){
+	*(HEX_ptr) = (lookUpTable[arr[0]]<<16)|(lookUpTable[arr[1]]<<8)|(lookUpTable[arr[2]]);
+}
 	}
    /*If the value is greater than 16, set HEX to zero*/
    
@@ -191,7 +191,7 @@ delay = 10000;
 	
 	   //count(234);
 	   /*For the main function, simply assign the value from the ReadSwitches() function to the DisplayHex() function*/
-			   DisplayHex(754);
+			   DisplayHex(165);
 			   /*Use a for loop to display the number for the appropriate amount of time*/
 			   //for (i = delay; i!= 0; --i);
        }
